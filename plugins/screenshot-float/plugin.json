@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "bennett.screenshot-float",
+  "name": {
+    "zh-CN": "截图悬浮",
+    "en-US": "Screenshot Float"
+  },
+  "description": {
+    "zh-CN": "截图悬浮工具插件",
+    "en-US": "Screenshot Float plugin"
+  },
+  "version": "1.0.0",
+  "apiVersion": 1,
+  "minAppVersion": "2.0.0",
+  "main": "main.js",
+  "icon": "📌",
+  "activation": "on-demand",
+  "author": "bennett-0727",
+  "homepage": "https://github.com/bennett-0727/bennett-toolbox-plugins",
+  "order": 100,
+  "recommended": true
+}

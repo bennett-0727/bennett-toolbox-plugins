@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "bennett.image-compressor",
+  "name": {
+    "zh-CN": "图片压缩",
+    "en-US": "Image Compressor"
+  },
+  "description": {
+    "zh-CN": "图片压缩工具插件",
+    "en-US": "Image Compressor plugin"
+  },
+  "version": "1.0.0",
+  "apiVersion": 1,
+  "minAppVersion": "2.0.0",
+  "main": "main.js",
+  "icon": "ZIP",
+  "activation": "on-demand",
+  "author": "bennett-0727",
+  "homepage": "https://github.com/bennett-0727/bennett-toolbox-plugins",
+  "order": 40,
+  "recommended": true
+}

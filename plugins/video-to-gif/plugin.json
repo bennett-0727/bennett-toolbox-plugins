@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "bennett.video-to-gif",
+  "name": {
+    "zh-CN": "视频转 GIF",
+    "en-US": "Video to GIF"
+  },
+  "description": {
+    "zh-CN": "视频转 GIF工具插件",
+    "en-US": "Video to GIF plugin"
+  },
+  "version": "1.0.0",
+  "apiVersion": 1,
+  "minAppVersion": "2.0.0",
+  "main": "main.js",
+  "icon": "GIF",
+  "activation": "on-demand",
+  "author": "bennett-0727",
+  "homepage": "https://github.com/bennett-0727/bennett-toolbox-plugins",
+  "order": 70,
+  "recommended": true
+}

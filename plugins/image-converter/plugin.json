@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "bennett.image-converter",
+  "name": {
+    "zh-CN": "图片转换",
+    "en-US": "Image Converter"
+  },
+  "description": {
+    "zh-CN": "图片转换工具插件",
+    "en-US": "Image Converter plugin"
+  },
+  "version": "1.0.0",
+  "apiVersion": 1,
+  "minAppVersion": "2.0.0",
+  "main": "main.js",
+  "icon": "🖼️",
+  "activation": "on-demand",
+  "author": "bennett-0727",
+  "homepage": "https://github.com/bennett-0727/bennett-toolbox-plugins",
+  "order": 30,
+  "recommended": true
+}

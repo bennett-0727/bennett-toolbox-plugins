@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "bennett.color-picker",
+  "name": {
+    "zh-CN": "屏幕取色",
+    "en-US": "Color Picker"
+  },
+  "description": {
+    "zh-CN": "屏幕取色工具插件",
+    "en-US": "Color Picker plugin"
+  },
+  "version": "1.0.0",
+  "apiVersion": 1,
+  "minAppVersion": "2.0.0",
+  "main": "main.js",
+  "icon": "🎨",
+  "activation": "on-demand",
+  "author": "bennett-0727",
+  "homepage": "https://github.com/bennett-0727/bennett-toolbox-plugins",
+  "order": 110,
+  "recommended": true
+}

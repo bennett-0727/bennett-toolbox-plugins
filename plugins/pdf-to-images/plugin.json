@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "bennett.pdf-to-images",
+  "name": {
+    "zh-CN": "PDF 转图片",
+    "en-US": "PDF to Images"
+  },
+  "description": {
+    "zh-CN": "PDF 转图片工具插件",
+    "en-US": "PDF to Images plugin"
+  },
+  "version": "1.0.0",
+  "apiVersion": 1,
+  "minAppVersion": "2.0.0",
+  "main": "main.js",
+  "icon": "PDF",
+  "activation": "on-demand",
+  "author": "bennett-0727",
+  "homepage": "https://github.com/bennett-0727/bennett-toolbox-plugins",
+  "order": 60,
+  "recommended": true
+}
