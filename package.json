@@ -1,0 +1,20 @@
+{
+  "name": "bennett-toolbox-plugins",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Plugins for Bennett Toolbox",
+  "scripts": {
+    "build": "node scripts/build-plugin.mjs",
+    "package": "node scripts/package-plugins.mjs",
+    "registry": "node scripts/generate-registry.mjs",
+    "validate": "node scripts/validate.mjs",
+    "release": "npm run build && npm run package && npm run registry && npm run validate"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "jszip": "^3.10.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  }
+}

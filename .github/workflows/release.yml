@@ -1,0 +1,40 @@
+name: Publish Plugins
+
+on:
+  push:
+    tags:
+      - "plugin-v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "26.13.0"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build, package and generate registry
+        env:
+          PLUGIN_RELEASE_TAG: ${{ github.ref_type == 'tag' && github.ref_name || 'plugin-v1.0.0' }}
+        run: npm run release
+
+      - name: Upload release assets
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/plugin-v')
+        with:
+          files: |
+            dist/registry.json
+            dist/zips/*.zip
+          fail_on_unmatched_files: true
