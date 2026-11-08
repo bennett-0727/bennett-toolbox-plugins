@@ -65,11 +65,5 @@ for (const dir of fs.readdirSync(PLUGINS)) {
       path.join(outDir, "pdf.worker.min.mjs"),
     );
   }
-  if (manifest.id === "bennett.sqlite-viewer") {
-    fs.copyFileSync(
-      path.join(ROOT, "node_modules/sql.js/dist/sql-wasm.wasm"),
-      path.join(outDir, "sql-wasm.wasm"),
-    );
-  }
   console.log(`built ${manifest.id}@${manifest.version}`);
 }

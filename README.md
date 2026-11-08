@@ -20,7 +20,7 @@ Bennett Toolbox 的官方插件仓库。插件以 ZIP 包发布，应用通过 `
 ### 可选开发者工具（`recommended: false`）
 
 - `bennett.timestamp-tools`：时间戳、Cron 表达式与时区转换
-- `bennett.sqlite-viewer`：浏览并查询本地 SQLite 数据库
+- `bennett.sqlite-viewer`：Schema 浏览、分页与快捷筛选、CodeMirror SQL 高亮/补全、历史/收藏、单表行内编辑与事务、全量流式导出
 - `bennett.markdown-preview`：Markdown 实时预览与 Mermaid 图表渲染
 - `bennett.qr-tools`：二维码生成与识别
 
