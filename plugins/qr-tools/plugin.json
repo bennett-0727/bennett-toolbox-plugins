@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "bennett.qr-tools",
+  "name": { "zh-CN": "二维码工具", "en-US": "QR Tools" },
+  "description": { "zh-CN": "生成与识别二维码", "en-US": "Generate and recognize QR codes" },
+  "version": "1.0.0",
+  "apiVersion": 1,
+  "minAppVersion": "2.0.0",
+  "main": "main.js",
+  "icon": "QR",
+  "activation": "on-demand",
+  "recommended": false,
+  "order": 150,
+  "author": "bennett-0727",
+  "homepage": "https://github.com/bennett-0727/bennett-toolbox-plugins"
+}

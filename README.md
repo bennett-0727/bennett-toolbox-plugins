@@ -17,6 +17,15 @@ Bennett Toolbox 的官方插件仓库。插件以 ZIP 包发布，应用通过 `
 - `bennett.color-picker`：屏幕取色
 - `bennett.text-stats`：文本统计示例
 
+### 可选开发者工具（`recommended: false`）
+
+- `bennett.timestamp-tools`：时间戳、Cron 表达式与时区转换
+- `bennett.sqlite-viewer`：浏览并查询本地 SQLite 数据库
+- `bennett.markdown-preview`：Markdown 实时预览与 Mermaid 图表渲染
+- `bennett.qr-tools`：二维码生成与识别
+
+可选插件会出现在工作台“可安装”列表，但不会随“安装全部推荐工具”自动安装。
+
 ## 开发
 
 ```bash

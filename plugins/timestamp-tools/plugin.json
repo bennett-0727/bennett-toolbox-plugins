@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "bennett.timestamp-tools",
+  "name": { "zh-CN": "时间与 Cron", "en-US": "Time & Cron" },
+  "description": { "zh-CN": "时间戳、Cron 表达式与时区转换", "en-US": "Timestamp, cron and timezone conversion" },
+  "version": "1.0.0",
+  "apiVersion": 1,
+  "minAppVersion": "2.0.0",
+  "main": "main.js",
+  "icon": "⏱",
+  "activation": "on-demand",
+  "recommended": false,
+  "order": 120,
+  "author": "bennett-0727",
+  "homepage": "https://github.com/bennett-0727/bennett-toolbox-plugins"
+}

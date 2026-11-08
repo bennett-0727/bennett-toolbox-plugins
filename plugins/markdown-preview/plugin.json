@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "bennett.markdown-preview",
+  "name": { "zh-CN": "Markdown / Mermaid", "en-US": "Markdown / Mermaid" },
+  "description": { "zh-CN": "Markdown 实时预览与 Mermaid 图表渲染", "en-US": "Live Markdown preview with Mermaid diagrams" },
+  "version": "1.0.0",
+  "apiVersion": 1,
+  "minAppVersion": "2.0.0",
+  "main": "main.js",
+  "icon": "📝",
+  "activation": "on-demand",
+  "recommended": false,
+  "order": 140,
+  "author": "bennett-0727",
+  "homepage": "https://github.com/bennett-0727/bennett-toolbox-plugins"
+}

@@ -14,6 +14,9 @@ export interface PluginApi {
     set(key: string, value: string): void;
     remove(key: string): void;
   };
+  assets: {
+    url(relative: string): string;
+  };
   log(...args: unknown[]): void;
 }
 
