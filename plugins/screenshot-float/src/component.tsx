@@ -19,24 +19,15 @@ function ScreenshotFloat() {
   if (!isElectron) {
     return <div className="screenshot-float"><div className="screenshot-float-header"><h1 className="module-title">截图悬浮</h1></div><div className="screenshot-float-body"><div className="empty-state"><div className="empty-icon">⚡</div><div className="empty-text">此功能需要在 Electron 应用中运行</div><div className="empty-hint">请运行 <code>npm run electron:dev</code> 或打开打包后的桌面应用</div></div></div></div>;
   }
-  const I = React.useCallback(async () => {
-    try {
-      const L = await ipcRenderer.invoke("check-screen-permission");
-      g(L);
-      return L === "granted";
-    } catch (L) {
-      console.error("检查权限失败:", L);
-      return false;
-    }
-  }, []);
   const N = React.useCallback(async () => {
     x(null);
     try {
-      await I();
       const L = await ipcRenderer.invoke("get-desktop-sources");
       if (L.length === 0) {
+        g("denied");
         x("未找到可用的屏幕源。请确保已授予屏幕录制权限。");
       } else {
+        g("granted");
         o(L);
         if (!s && L.length > 0) {
           i(L[0].id);
@@ -44,9 +35,10 @@ function ScreenshotFloat() {
       }
     } catch (L) {
       console.error("获取屏幕源失败:", L);
+      g("denied");
       x("获取屏幕源失败，请检查权限设置。");
     }
-  }, [s, I]);
+  }, [s]);
   React.useEffect(() => {
     N();
     const L = (W, B) => {
@@ -66,6 +58,17 @@ function ScreenshotFloat() {
       ipcRenderer.removeListener("capture-result", L);
     };
   }, []);
+  React.useEffect(() => {
+    const L = () => {
+      if (w !== "granted") {
+        N();
+      }
+    };
+    window.addEventListener("focus", L);
+    return () => {
+      window.removeEventListener("focus", L);
+    };
+  }, [w, N]);
   const D = React.useCallback(async () => {
     x(null);
     try {
@@ -109,13 +112,14 @@ function ScreenshotFloat() {
       j.height = B.videoHeight;
       j.getContext("2d").drawImage(B, 0, 0);
       W.getTracks().forEach(Q => Q.stop());
+      g("granted");
       const Y = j.toDataURL("image/png");
       u(Y);
       d(true);
     } catch (L) {
       console.error("截图失败:", L);
       if (L.name === "NotAllowedError") {
-        x("屏幕录制权限被拒绝。请在 系统偏好设置 > 安全性与隐私 > 隐私 > 屏幕录制 中授予权限。");
+        x("屏幕录制权限被拒绝。请在 系统偏好设置 > 安全性与隐私 > 隐私 > 屏幕录制 中授予权限；若已授权仍提示，请退出并重新打开应用。");
       } else {
         x(`截图失败: ${L.message || "未知错误"}`);
       }
@@ -243,7 +247,7 @@ function ScreenshotFloat() {
       height: j - W
     };
   };
-  return <div className="screenshot-float"><div className="screenshot-float-header"><h1 className="module-title">截图悬浮</h1><div className="header-actions"><button className="btn btn-secondary" onClick={N}>🔄 刷新源</button><button className="btn btn-primary" onClick={D}>✂️ 框选截图</button><button className="btn btn-secondary" onClick={T} disabled={e || !s}>{e ? "截取中..." : "📷 截取整屏"}</button></div></div><div className="screenshot-float-body" ref={E}>{w !== "granted" && w !== "unknown" && <div className="permission-warning"><span className="warning-icon">⚠️</span><span>屏幕录制权限状态: {w}{"。请在 系统偏好设置 > 安全性与隐私 > 隐私 > 屏幕录制 中授予权限。"}</span><button className="btn btn-secondary btn-sm permission-settings-btn" onClick={() => ipcRenderer.invoke("open-screen-permission-settings")}>打开系统设置</button></div>}{y && <div className="error-box"><span className="error-icon">❌</span><span>{y}</span></div>}<div className="source-selector"><label className="selector-label">选择截图源：{a.length === 0 && "(点击刷新按钮获取)"}</label><div className="source-list">{a.length === 0 && <div className="no-sources"><span>未找到可用的屏幕源</span><button className="btn btn-secondary btn-sm" onClick={N}>🔄 刷新</button></div>}{a.map(L => <div className={`source-item ${s === L.id ? "active" : ""}`} onClick={() => i(L.id)} key={L.id}><img src={L.thumbnail} alt={L.name} className="source-thumbnail" /><span className="source-name">{L.name}</span></div>)}</div></div>{h && c && <div className="crop-overlay"><div className="crop-container"><div className="crop-header"><span>拖拽选择截图区域</span><button className="btn btn-secondary btn-sm" onClick={z}>取消</button></div><div className="crop-preview-wrapper" onMouseDown={O} onMouseMove={_} onMouseUp={M} onMouseLeave={() => f && M()}><img ref={A} src={c} alt="预览" className="crop-preview-image" draggable={false} />{f && v && <div className="crop-selection" style={X()}><div className="crop-size">{Math.abs(v.x - f.x).toFixed(0)} × {Math.abs(v.y - f.y).toFixed(0)}</div></div>}</div></div></div>}{r.length > 0 && <div className="screenshots-section"><h3 className="section-title">已截图 ({r.length})</h3><div className="screenshots-grid">{r.map(L => <div className="screenshot-card" key={L.id}><img src={L.dataUrl} alt="截图" className="screenshot-image" /><div className="screenshot-info"><span className="screenshot-size">{L.width} × {L.height}</span><span className="screenshot-time">{L.timestamp.toLocaleTimeString()}</span></div><div className="screenshot-actions"><button className="action-btn" onClick={() => k(L)} title="创建悬浮窗">📌</button><button className="action-btn" onClick={() => K(L.dataUrl)} title="复制到剪贴板">📋</button><button className="action-btn" onClick={() => $(L)} title="下载">💾</button><button className="action-btn danger" onClick={() => G(L.id)} title="删除">🗑️</button></div></div>)}</div></div>}{r.length === 0 && !h && <div className="empty-state"><div className="empty-icon">📷</div><div className="empty-text">点击截取屏幕开始</div><div className="empty-hint">截图后可以创建悬浮窗口，方便参考</div></div>}</div></div>;
+  return <div className="screenshot-float"><div className="screenshot-float-header"><h1 className="module-title">截图悬浮</h1><div className="header-actions"><button className="btn btn-secondary" onClick={N}>🔄 刷新源</button><button className="btn btn-primary" onClick={D}>✂️ 框选截图</button><button className="btn btn-secondary" onClick={T} disabled={e || !s}>{e ? "截取中..." : "📷 截取整屏"}</button></div></div><div className="screenshot-float-body" ref={E}>{w !== "granted" && w !== "unknown" && <div className="permission-warning"><span className="warning-icon">⚠️</span><span>屏幕录制权限状态: {w}{"。请在 系统偏好设置 > 安全性与隐私 > 隐私 > 屏幕录制 中授予权限；若已授权仍提示，请退出并重新打开应用。"}</span><button className="btn btn-secondary btn-sm permission-recheck-btn" onClick={N}>重新检测</button><button className="btn btn-secondary btn-sm permission-settings-btn" onClick={() => ipcRenderer.invoke("open-screen-permission-settings")}>打开系统设置</button></div>}{y && <div className="error-box"><span className="error-icon">❌</span><span>{y}</span></div>}<div className="source-selector"><label className="selector-label">选择截图源：{a.length === 0 && "(点击刷新按钮获取)"}</label><div className="source-list">{a.length === 0 && <div className="no-sources"><span>未找到可用的屏幕源</span><button className="btn btn-secondary btn-sm" onClick={N}>🔄 刷新</button></div>}{a.map(L => <div className={`source-item ${s === L.id ? "active" : ""}`} onClick={() => i(L.id)} key={L.id}><img src={L.thumbnail} alt={L.name} className="source-thumbnail" /><span className="source-name">{L.name}</span></div>)}</div></div>{h && c && <div className="crop-overlay"><div className="crop-container"><div className="crop-header"><span>拖拽选择截图区域</span><button className="btn btn-secondary btn-sm" onClick={z}>取消</button></div><div className="crop-preview-wrapper" onMouseDown={O} onMouseMove={_} onMouseUp={M} onMouseLeave={() => f && M()}><img ref={A} src={c} alt="预览" className="crop-preview-image" draggable={false} />{f && v && <div className="crop-selection" style={X()}><div className="crop-size">{Math.abs(v.x - f.x).toFixed(0)} × {Math.abs(v.y - f.y).toFixed(0)}</div></div>}</div></div></div>}{r.length > 0 && <div className="screenshots-section"><h3 className="section-title">已截图 ({r.length})</h3><div className="screenshots-grid">{r.map(L => <div className="screenshot-card" key={L.id}><img src={L.dataUrl} alt="截图" className="screenshot-image" /><div className="screenshot-info"><span className="screenshot-size">{L.width} × {L.height}</span><span className="screenshot-time">{L.timestamp.toLocaleTimeString()}</span></div><div className="screenshot-actions"><button className="action-btn" onClick={() => k(L)} title="创建悬浮窗">📌</button><button className="action-btn" onClick={() => K(L.dataUrl)} title="复制到剪贴板">📋</button><button className="action-btn" onClick={() => $(L)} title="下载">💾</button><button className="action-btn danger" onClick={() => G(L.id)} title="删除">🗑️</button></div></div>)}</div></div>}{r.length === 0 && !h && <div className="empty-state"><div className="empty-icon">📷</div><div className="empty-text">点击截取屏幕开始</div><div className="empty-hint">截图后可以创建悬浮窗口，方便参考</div></div>}</div></div>;
 }
 
 export default ScreenshotFloat;
