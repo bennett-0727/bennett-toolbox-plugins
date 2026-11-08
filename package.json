@@ -2,7 +2,7 @@
   "name": "bennett-toolbox-plugins",
   "private": true,
   "type": "module",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Plugins for Bennett Toolbox",
   "scripts": {
     "build": "node scripts/build-plugin.mjs",
