@@ -9,7 +9,7 @@
     "zh-CN": "文件搜索工具插件",
     "en-US": "File Search plugin"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "apiVersion": 1,
   "minAppVersion": "2.0.0",
   "main": "main.js",
